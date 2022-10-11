@@ -1,15 +1,12 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
 
-<div align="center">
-  <p align="center">
-    [![Contributors][contributors-shield]][contributors-url]
-    [![Forks][forks-shield]][forks-url]
-    [![Stargazers][stars-shield]][stars-url]
-    [![Issues][issues-shield]][issues-url]
-    [![License][license-shield]][license-url]
-  </p>
-</div>
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![License][license-shield]][license-url]
+
 
 
 <!-- PROJECT LOGO -->
@@ -31,7 +28,7 @@
     ·
     <a href="https://github.com/savdbroek/shopicord/issues">Request Feature</a>
   </p>
-
+</div>
 
 
 
