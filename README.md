@@ -222,6 +222,12 @@ Project Link: [https://github.com/savdbroek/shopicord](https://github.com/savdbr
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+<div align="center">
+  <a href="https://www.paypal.com/donate/?hosted_button_id=WQVE8887RETGY">
+    <img src="https://github.com/andreostrovsky/donate-with-paypal/blob/master/PNG/blue.png?raw=true" alt="Logo" width="120" height="120">
+  </a>
+</div>
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
