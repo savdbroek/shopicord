@@ -224,7 +224,7 @@ Project Link: [https://github.com/savdbroek/shopicord](https://github.com/savdbr
 
 <div align="center">
   <a href="https://www.paypal.com/donate/?hosted_button_id=WQVE8887RETGY">
-    <img src="https://github.com/andreostrovsky/donate-with-paypal/blob/master/PNG/blue.png?raw=true" alt="Logo" height="120">
+    <img src="https://github.com/andreostrovsky/donate-with-paypal/blob/master/PNG/blue.png?raw=true" alt="Donate Button Paypal" height="60">
   </a>
 </div>
 
