@@ -5,9 +5,6 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 
 
 <!-- PROJECT LOGO -->
@@ -48,6 +45,8 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#setup-discord-bot">Setup Discord bot</a></li>
+        <li><a href="#setup-shopify-app">Setup Shopify App</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -69,7 +68,6 @@ However, I feel like it might be of use to someone out there. I will be going th
 
 Please let me know if you find any bugs or have feature requests!
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -77,7 +75,6 @@ Please let me know if you find any bugs or have feature requests!
 
 * [![Python][Python.org]][Python-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -116,7 +113,7 @@ The following things are required before using this project.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Setup Discord Bot -->
-## Discord Bot
+### Setup Discord Bot
 
 Use the following page to create your own Discord Bot:
 
@@ -125,7 +122,7 @@ Use the following page to create your own Discord Bot:
 You need your Bot Token.
 
 <!-- Creating Shopify App -->
-## Setup Shopify App
+### Setup Shopify App
 
 Don't worry you won't need to do anything complicated. Just open up your Shopify Admin page and follow along.
 
