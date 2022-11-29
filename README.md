@@ -90,7 +90,7 @@ The following things are required before using this project.
 * Shopify Store
 * Discord Server
 * API-Ninjas Key (free) [https://api-ninjas.com/](https://api-ninjas.com/)
-* Setup Discord Bot - <a href="#discord-bot">Setting up a Discord Bot/a>
+* Setup Discord Bot - <a href="#discord-bot">Setting up a Discord Bot</a>
 * Setup Shopify App - <a href="#shopify-app">Setting up a Shopify App</a>
 
 ### Installation
