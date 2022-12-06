@@ -27,38 +27,36 @@ def order_list():
         'X-Shopify-Access-Token': app_token,
     }
 
-    response = requests.get(f'{api_url}orders.json?status=open', headers=headers).json()
-    order_list = response["orders"]
-    order_dict = {}
-    for order in order_list:
-        id, order_number, order_time, country = order["id"], order["order_number"], order["created_at"], order["shipping_address"]["country_code"]
-        year, month, day, time = order_time[0:4], order_time[5:7], order_time[8:10], order_time[11:16]
-        try:
-            country = order["shipping_address"]["country_code"]
-        except KeyError:
-            country = order["billing_address"]["country_code"]
-        tmp_dict = {order_number: {"year": year, "month": month, "day": day, "time": time, "country": country, "id": id}}
-        merge(order_dict, tmp_dict)
+    response = requests.get(f'{api_url}orders.json?status=open', headers=headers)
+    order_list = response.json()["orders"]
+    order_dict = {order["order_number"]: {
+        "year": order["created_at"][0:4],
+        "month": order["created_at"][5:7],
+        "day": order["created_at"][8:10],
+        "time": order["created_at"][11:16],
+        "country": order["shipping_address"].get("country_code") or order["billing_address"].get("country_code"),
+        "id": order["id"]
+    } for order in order_list}
     return order_dict
+
 
 def closed_order_list():
     headers = {
         'X-Shopify-Access-Token': app_token,
     }
 
-    response = requests.get(f'{api_url}orders.json?status=any&limit=150;', headers=headers).json()
-    order_list = response["orders"]
-    order_dict = {}
-    for order in order_list:
-        id, order_number, order_time = order["id"], order["order_number"], order["created_at"]
-        year, month, day, time = order_time[0:4], order_time[5:7], order_time[8:10], order_time[11:16]
-        try:
-            country = order["shipping_address"]["country_code"]
-        except KeyError:
-            country = order["billing_address"]["country_code"]
-        tmp_dict = {order_number: {"year": year, "month": month, "day": day, "time": time, "country": country, "id": id}}
-        merge(order_dict, tmp_dict)
+    response = requests.get(f'{api_url}orders.json?status=any&limit=150;', headers=headers)
+    order_list = response.json()["orders"]
+    order_dict = {order["order_number"]: {
+        "year": order["created_at"][0:4],
+        "month": order["created_at"][5:7],
+        "day": order["created_at"][8:10],
+        "time": order["created_at"][11:16],
+        "country": order["shipping_address"].get("country_code") or order["billing_address"].get("country_code"),
+        "id": order["id"]
+    } for order in order_list}
     return order_dict
+
 
 def closed_count(today):
     headers = {
@@ -74,46 +72,27 @@ def get_order(uuid):
     }
 
     orders = order_list()
-    try:
-        unique_id = orders[int(uuid)]["id"]
-        response = requests.get(f'{api_url}orders/' + str(unique_id) + '.json', headers=headers).json()
-        order_full = response['order']
-        product_dict = {}
-        name, order_number, email, price, country = order_full['shipping_address']['name'], order_full['name'], order_full['contact_email'], order_full['total_line_items_price_set']['shop_money']['amount'], order_full['shipping_address']['country_code']
-        products = order_full['line_items']
-        count, product_list = 0, []
-        for product in products:
-            count +=1
-            product_name, quantity = product['name'], product['quantity']
-            #product_tmp_dict = {order_number: {count: {"product_name" : product_name, "quantity" : quantity}}}
-            product_tuple = (f"{product_name}",f"{quantity}")
-            product_list.append(product_tuple)
-        order_dict = {order_number: {"name": name, "email": email, "price": price, "country": country, "products": product_list}}
-        return order_dict
-    except KeyError:
+    unique_id = orders.get(int(uuid))["id"]
+    if unique_id is None:
         orders = closed_order_list()
-        try:
-            unique_id = orders[int(uuid)]["id"]
-            response = requests.get(f'{api_url}orders/' + str(unique_id) + '.json', headers=headers).json()
-            order_full = response['order']
-            product_dict = {}
-            name, order_number, email, price, country = order_full['shipping_address']['name'], order_full['name'], order_full['contact_email'], order_full['total_line_items_price_set']['shop_money']['amount'], order_full['shipping_address']['country_code']
-            products = order_full['line_items']
-            count, product_list = 0, []
-            for product in products:
-                count +=1
-                product_name, quantity = product['name'], product['quantity']
-                #product_tmp_dict = {order_number: {count: {"product_name" : product_name, "quantity" : quantity}}}
-                product_tuple = (f"{product_name}",f"{quantity}")
-                product_list.append(product_tuple)
-            order_dict = {order_number: {"name": name, "email": email, "price": price, "country": country, "products": product_list}}
-            return order_dict
-        except KeyError:
+        unique_id = orders.get(int(uuid))["id"]
+        if unique_id is None:
             return "That order number doesn't exist."
-        except:
-            return Exception
-    except:
-        return Exception
+
+    url = 'https://clickeys-nl.myshopify.com/admin/api/2022-04/orders/{}.json'.format(unique_id)
+    response = requests.get(url, headers=headers).json()
+    order_full = response['order']
+
+    name, order_number, email, price, country = order_full['shipping_address']['name'], order_full['name'], order_full['contact_email'], order_full['total_line_items_price_set']['shop_money']['amount'], order_full['shipping_address']['country_code']
+    products = order_full['line_items']
+    product_list = []
+    for product in products:
+        product_name, quantity = product['name'], product['quantity']
+        product_tuple = (f"{product_name}",f"{quantity}")
+        product_list.append(product_tuple)
+
+    order_dict = {order_number: {"name": name, "email": email, "price": price, "country": country, "products": product_list}}
+    return order_dict
 
 def random_quote():
     limit = 1
