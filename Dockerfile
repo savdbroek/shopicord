@@ -1,4 +1,4 @@
-FROM python:3.10.7-alpine3.16
+FROM python:3.12.0a3-alpine3.16
 
 RUN apk add --no-cache --update \
     && python3 -m ensurepip \
